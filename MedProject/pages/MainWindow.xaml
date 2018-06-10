@@ -1,0 +1,21 @@
+﻿<Window x:Class="MedProject.pages.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Чем я болею?" Height="450" Width="550">
+    <Grid>
+        <ListBox x:Name="DragList" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
+                 HorizontalAlignment="Left" Margin="12,29,0,12" Width="250" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" />
+        <ListBox x:Name="DropList" Drop="ListBox_Drop" AllowDrop="True"
+                 HorizontalAlignment="Right" Margin="0,29,12,12" Width="250" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+        <ComboBox x:Name="Section" Height="21" HorizontalAlignment="Left" 
+                   Margin="12,2,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="Section_OnSelectionChanged" />
+        <TextBlock Height="21" Text="Мои симптомы" HorizontalAlignment="Right" 
+                   Margin="0,2,107,0" VerticalAlignment="Top" Width="120" />
+        <Button Click="Btn_OnClick" x:Name="Btn" Margin="0,2,50,0" Width="68" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Content="Подсчет"></Button>
+    </Grid>
+</Window>
