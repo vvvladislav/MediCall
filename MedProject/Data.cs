@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,14 +20,20 @@ namespace MedProject
 
 
             var rowSections = File.ReadAllText("Sections.json");
-            _sections = JsonConvert.DeserializeObject<ObservableCollection<Section>>(rowSections);
+            _sections = new ObservableCollection<Section>(JsonConvert.DeserializeObject<ObservableCollection<Section>>(rowSections).OrderBy(x => x.Name));
+
+            foreach (var item in _sections)
+            {
+                item.Symptoms = new ObservableCollection<Symptom>(item.Symptoms.OrderBy(x => x.Name));
+            }
+
 
             var rowDiseases = File.ReadAllText("Diseases.json");
             _diseases = JsonConvert.DeserializeObject<ObservableCollection<Disease>>(rowDiseases);
 
             foreach (var item in _diseases)
             {
-                item.Symptoms =  new ObservableCollection<Symptom>(item.Symptoms.OrderBy(x => x.Name));
+                item.Symptoms = new ObservableCollection<Symptom>(item.Symptoms.OrderBy(x => x.Name));
             }
 
         }
@@ -71,13 +77,12 @@ namespace MedProject
         /// <returns></returns>
         public static string GetDisease(IEnumerable<string> symptoms)
         {
-       
+
             var myDisease = new Disease(symptoms);
 
 
             var minLen = 100000;
             var predictName = "";
-
 
 
             foreach (var disease in _diseases)
@@ -101,7 +106,7 @@ namespace MedProject
         {
             if (source == null)
                 return target?.Symptoms.Count ?? 0;
-            
+
 
             if (target == null) return source.Symptoms.Count;
 
