@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Чем я болею?" Height="450" Width="550">
+        Title="Чем я болею?" Height="450" Width="550" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListBox x:Name="DragList" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
                  HorizontalAlignment="Left" Margin="12,29,0,12" Width="250" 
