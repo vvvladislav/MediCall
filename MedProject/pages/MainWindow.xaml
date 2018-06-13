@@ -11,7 +11,7 @@
                  ScrollViewer.VerticalScrollBarVisibility="Visible" />
         <ListBox x:Name="DropList" Drop="ListBox_Drop" AllowDrop="True"
                  HorizontalAlignment="Right" Margin="0,29,12,12" Width="250" 
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" MouseRightButtonUp="DropList_OnMouseRightButtonUp"/>
         <ComboBox x:Name="Section" Height="21" HorizontalAlignment="Left" 
                    Margin="12,2,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="Section_OnSelectionChanged" />
         <TextBlock Height="21" Text="Мои симптомы" HorizontalAlignment="Right" 
