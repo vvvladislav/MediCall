@@ -126,5 +126,31 @@ namespace MedProject.pages
             }
 
         }
+        
+        private void DropList_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var parent = (ListBox)sender;
+            _dragSource = parent;
+            var data = GetDataFromListBox(_dragSource, e.GetPosition(parent)).ToString();
+
+            DropList.Items.Remove(data);
+
+            var section = Data.ComeBack(data);
+
+            if (Section.SelectedValue.ToString() == section)
+            {
+                var oldData = Data.GetSectionSymptomsNames(Section.SelectedValue.ToString());
+
+                if (DropList.Items.IsEmpty)
+                {
+                    DragList.ItemsSource = oldData;
+                }
+                else
+                {
+                    var existData = DropList.Items.Cast<string>();
+                    DragList.ItemsSource = oldData.Where(x => !existData.Contains(x)).ToList();
+                }
+            }
+        }
     }
 }
