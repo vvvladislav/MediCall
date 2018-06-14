@@ -114,6 +114,5 @@ Storyboard.TargetProperty="Color" To="Transparent" />
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
     </Grid>
 </Window>

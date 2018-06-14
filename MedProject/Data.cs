@@ -37,6 +37,16 @@ namespace MedProject
             }
 
         }
+        
+        /// <summary>
+        /// Метод, который находит к какой категории относится данный симптом
+        /// </summary>
+        /// <param name="symptom"></param>
+        /// <returns></returns>
+        public static string ComeBack(string symptom)
+        {
+            return _sections.Single(x => x.Symptoms.Select(y=>y.Name).Contains(symptom)).Name;
+        }
 
         /// <summary>
         /// Метод получения списка категорий
