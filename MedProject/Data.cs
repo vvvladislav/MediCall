@@ -149,15 +149,5 @@ namespace MedProject
 
             return distance[currentRow, m];
         }
-
-        /// <summary> 
-        /// Метод, который находит к какой категории относится данный симптом 
-        /// </summary> 
-        /// <param name="symptom"></param> 
-        /// <returns></returns> 
-        public static string ComeBack(string symptom)
-        {
-            return _sections.SingleOrDefault(x => x.Symptoms.Select(y => y.Name).Contains(symptom)).Name;
-        }
     }
 }

@@ -65,9 +65,17 @@
     <Compile Include="pages\LogoWindow.xaml.cs">
       <DependentUpon>LogoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Section.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="Symptom.cs" />
     <Page Include="pages\LogoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
