@@ -14,7 +14,6 @@ namespace MedProject.pages
         public MainWindow()
         {
             InitializeComponent();
-
             //Считываем категории, симптомы и болезни из файлов
             Data.GetDataFromFile();
 
@@ -45,6 +44,7 @@ namespace MedProject.pages
         //Получение данных из объекта списка
         private static object GetDataFromListBox(ItemsControl source, Point point)
         {
+            ///////////////////////////////////////////////////////////////////////////////////
             if (!(source.InputHitTest(point) is UIElement element)) return null;
             var data = DependencyProperty.UnsetValue;
             while (data == DependencyProperty.UnsetValue)
@@ -91,9 +91,9 @@ namespace MedProject.pages
         }
 
         //Обработка изменения категории
-        private void Section_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Section_OnSelectionChanged(object sender, SelectionChangedEventArgs e) //обработчик события изменения выбора в комбобоксе
         {
-
+            
             var oldData = Data.GetSectionSymptomsNames(Section.SelectedValue.ToString());
 
             if (DropList.Items.IsEmpty)
@@ -112,6 +112,14 @@ namespace MedProject.pages
         private void Btn_OnClick(object sender, RoutedEventArgs e)
         {
             var mySymptoms = DropList.Items.SourceCollection.Cast<string>();
+            if (!mySymptoms.Any())
+            {
+                MessageBox.Show("Введите хотя бы один симптом", "Упс...");
+                return;
+            }
+
+
+
 
             //Получаем возможную болезнь по симптомам, которые выбрал пользователь
             var prediction = Data.GetDisease(mySymptoms);
@@ -125,6 +133,37 @@ namespace MedProject.pages
                 System.Diagnostics.Process.Start($"http://simptomer.ru/search?searchword={prediction}");
             }
 
+        }
+
+        private void DropList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DropList_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var parent = (ListBox)sender;
+            _dragSource = parent;
+            var data = GetDataFromListBox(_dragSource, e.GetPosition(parent)).ToString();
+
+            DropList.Items.Remove(data);
+
+            var section = Data.ComeBack(data);
+
+            if (Section.SelectedValue.ToString() == section)
+            {
+                var oldData = Data.GetSectionSymptomsNames(Section.SelectedValue.ToString());
+
+                if (DropList.Items.IsEmpty)
+                {
+                    DragList.ItemsSource = oldData;
+                }
+                else
+                {
+                    var existData = DropList.Items.Cast<string>();
+                    DragList.ItemsSource = oldData.Where(x => !existData.Contains(x)).ToList();
+                }
+            }
         }
     }
 }
